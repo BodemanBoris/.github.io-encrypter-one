@@ -25,8 +25,117 @@
     />
     <link rel="stylesheet" href="/css/styles.css" />
     <style>
+      html {
+        max-width: 1200px;
+        background-color: rgb(219, 241, 248);
+        margin-left: auto;
+        margin-right: auto;
+      }
       body {
-        background-color: blue;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Poppins;
+      }
+      p {
+        text-align: center;
+      }
+
+      .conteiner-btn {
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      .conteiner-textarea {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      #content-textarea {
+        resize: none;
+        border: 0;
+        border-radius: 15px;
+        padding: 10px 15px;
+        font-family: Poppins;
+        font-size: 20px;
+      }
+
+      .btn {
+        text-decoration: none;
+        color: black;
+        display: inline-block;
+        background-color: aquamarine;
+        padding: 5px 15px;
+        width: 100px;
+        text-align: center;
+        border-radius: 15px;
+        border: 1px solid;
+      }
+      .btn:hover {
+        background-color: rgb(73, 212, 166);
+      }
+
+      h1 {
+        display: block;
+        font-family: Poppins;
+        text-align: center;
+      }
+      .subtitulo {
+        font-size: 20px;
+      }
+      .new-font {
+        font-size: 26px;
+        font-family: "Asap Condensed", sans-serif;
+        font-weight: 500;
+      }
+      .contenedor-pijon {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0px;
+      }
+      .conteiner-texto-tratado {
+        display: flex;
+        justify-content: center;
+        flex-flow: column;
+        align-items: center;
+        width: 350px;
+        height: auto;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 21px 36px 50px 2px rgba(0, 0, 0, 0.19);
+        -webkit-box-shadow: 21px 36px 50px 2px rgba(0, 0, 0, 0.19);
+        -moz-box-shadow: 21px 36px 50px 2px rgba(0, 0, 0, 0.19);
+      }
+
+      .texto-tratado__title {
+        text-align: center;
+      }
+
+      .pie-pagina h3 {
+        text-align: center;
+      }
+
+      .social-div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      i {
+        font-size: 25px;
+        color: black;
+      }
+
+      .social-div a {
+        margin: 0 15px;
+      }
+
+      @media (min-width: 850px) {
+        .conteiner-encriptador {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
     </style>
     <title>Encriptador</title>
@@ -85,6 +194,92 @@
         ></a>
       </div>
     </footer>
-    <script src="/js/1-main.js" type="module"></script>
+    <script src="/js/1-main.js" type="module">
+
+      let textoAEncriptar;
+      const d = document,
+        n = navigator;
+
+      const $encriptarBtn = d.querySelector(".btn-encriptar");
+      const $textarea = d.getElementById("content-textarea");
+      const $titleFin = d.querySelector(".texto-tratado__title");
+      const $parrafoFin = d.querySelector("texto-tratado__parrafo");
+      const newParraf = d.createElement("p");
+      const $limpiarBtn = d.querySelector(".btn-limpiar");
+      const $copiarBtn = d.querySelector(".btn-copiar");
+      const $desencriptarBtn = d.querySelector(".btn-desencriptar");
+
+      /*  Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui ipsum debitis eius temporibus vero sunt velit sapiente necessitatibus dignissimos maxime, iusto deleniti nam amet minima laborum esse ut! Alias, fugiat. */
+
+      //console.log($titleFin.textContent);
+
+      $textarea.focus();
+
+      $copiarBtn.addEventListener("click", async () => {
+        if (newParraf.textContent === "") {
+          alert("Campo Vacio");
+        } else {
+          await n.clipboard.writeText(newParraf.textContent);
+          alert("texto copiado");
+        }
+      });
+
+      d.addEventListener("click", (e) => {
+        if (e.target === $encriptarBtn) {
+          e.preventDefault();
+          textoAEncriptar = $textarea.value;
+
+          //console.log(textoAEncriptar);
+
+          textoAEncriptar = textoAEncriptar.replace(/e/g, "enter");
+          textoAEncriptar = textoAEncriptar.replace(/i/g, "imes");
+          textoAEncriptar = textoAEncriptar.replace(/a/g, "ai");
+          textoAEncriptar = textoAEncriptar.replace(/o/g, "ober");
+          textoAEncriptar = textoAEncriptar.replace(/u/g, "ufat");
+
+          $titleFin.textContent = "Tu texto es:";
+          newParraf.classList.add("newParraf");
+          newParraf.textContent = textoAEncriptar;
+          $titleFin.insertAdjacentElement("afterend", newParraf);
+
+          console.log(textoAEncriptar);
+        }
+      });
+
+      d.addEventListener("click", (e) => {
+        if (e.target === $desencriptarBtn) {
+          e.preventDefault();
+          textoAEncriptar = $textarea.value;
+          /*
+          textoAEncriptar = textoAEncriptar.replace(/e/g, "enter");
+          textoAEncriptar = textoAEncriptar.replace(/i/g, "imes");
+          textoAEncriptar = textoAEncriptar.replace(/a/g, "ai");
+          textoAEncriptar = textoAEncriptar.replace(/o/g, "ober");
+          textoAEncriptar = textoAEncriptar.replace(/u/g, "ufat"); */
+
+          textoAEncriptar = textoAEncriptar.replace(/enter/g, "e");
+          textoAEncriptar = textoAEncriptar.replace(/imes/g, "i");
+          textoAEncriptar = textoAEncriptar.replace(/ai/g, "a");
+          textoAEncriptar = textoAEncriptar.replace(/ober/g, "o");
+          textoAEncriptar = textoAEncriptar.replace(/ufat/g, "u");
+
+          $titleFin.textContent = "Tu texto es:";
+          newParraf.classList.add("newParraf");
+          newParraf.textContent = textoAEncriptar;
+          $titleFin.insertAdjacentElement("afterend", newParraf);
+
+          console.log(textoAEncriptar);
+        }
+      });
+
+      d.addEventListener("click", (e) => {
+        if (e.target === $limpiarBtn) {
+          e.preventDefault();
+          newParraf.textContent = "";
+
+          $titleFin.textContent = "Ningun mensaje fue encontrado";
+        }
+      });
+    </script>
   </body>
 </html>
