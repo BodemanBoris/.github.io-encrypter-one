@@ -166,6 +166,7 @@
         <div class="conteiner-btn conteiner__btn-encriptar">
           <a href="#" class="btn btn-encriptar">Encriptar</a>
           <a href="#" class="btn btn-desencriptar">Desencriptar</a>
+          <a href="#" class="btn btn-limpiar2">Limpiar</a>
         </div>
       </section>
       <section class="mensaje-final">
@@ -213,6 +214,7 @@
       const $limpiarBtn = d.querySelector(".btn-limpiar");
       const $copiarBtn = d.querySelector(".btn-copiar");
       const $desencriptarBtn = d.querySelector(".btn-desencriptar");
+      const $btnLimpiar2 = d.querySelector(".btn-limpiar2");
 
       /*  Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui ipsum debitis eius temporibus vero sunt velit sapiente necessitatibus dignissimos maxime, iusto deleniti nam amet minima laborum esse ut! Alias, fugiat. */
 
@@ -275,6 +277,11 @@
 
           console.log(textoAEncriptar);
         }
+      });
+
+      $btnLimpiar2.addEventListener("click", (e) => {
+        e.preventDefault;
+        $textarea.value = "";
       });
 
       d.addEventListener("click", (e) => {
